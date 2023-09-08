@@ -16,7 +16,7 @@ class Resolver {
             name,
             queryClient: this.queryClient,
             resolver: this.address,
-            seiIdAddress: this.injectiveIdAddr,
+            injectiveIdAddress: this.injectiveIdAddr,
         })
     }
 }

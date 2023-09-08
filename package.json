@@ -1,6 +1,6 @@
 {
   "name": "@siddomains/injective-sidjs",
-  "version": "0.0.0",
+  "version": "0.0.1-beta",
   "description": "injective-sidjs v1",
   "main": "dist/index.js",
   "repository": "Space-ID/injective-sidjs",
