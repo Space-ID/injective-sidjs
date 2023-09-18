@@ -41,6 +41,28 @@ async function main(name) {
 
 main("999.inj")
 ```
+```javascript
+// injective-1 mainnet domain example
+const InjectiveID = require('@siddomains/injective-sidjs').default
+const {getInjectiveIDAddress} = require('@siddomains/injective-sidjs')
+const {getNetworkEndpoints, Network} = require("@injectivelabs/networks");
+const {ChainId} = require("@injectivelabs/ts-types");
+
+async function main(name) {
+    const endpoints = getNetworkEndpoints(Network.Mainnet)
+    const injectiveId = new InjectiveID({
+        grpc: endpoints.grpc,
+        chainId: ChainId.Mainnet,
+        injectiveIdAddress: getInjectiveIDAddress(ChainId.Mainnet)
+    })
+
+    const address = await injectiveId.name(name).getAddress()
+    console.log("name: %s, address: %s", name, address)
+}
+
+main("testtest.inj")
+```
+
 
 ### exports
 
