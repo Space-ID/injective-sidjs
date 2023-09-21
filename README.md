@@ -20,6 +20,8 @@ npm install @siddomains/injective-sidjs @injectivelabs/sdk-ts
 All that's needed to get started is a grpc, you should pass it and select chain id when creating a new InjectiveID
 instance.
 
+#### Domain Resolution
+
 ```javascript
 // injective-888 testnet domain example
 const InjectiveID = require('@siddomains/injective-sidjs').default
@@ -63,6 +65,51 @@ async function main(name) {
 main("testtest.inj")
 ```
 
+#### Reverse Resolution
+
+```javascript
+// injective-888 testnet example
+const InjectiveID = require('@siddomains/injective-sidjs').default
+const {getInjectiveIDAddress} = require('@siddomains/injective-sidjs')
+const {getNetworkEndpoints, Network} = require("@injectivelabs/networks");
+const {ChainId} = require("@injectivelabs/ts-types");
+
+async function main(address) {
+    const endpoints = getNetworkEndpoints(Network.Testnet)
+    const injectiveId = new InjectiveID({
+        grpc: endpoints.grpc,
+        chainId: ChainId.Testnet,
+        injectiveIdAddress: getInjectiveIDAddress(ChainId.Testnet)
+    })
+
+    const name = await injectiveId.getName(address)
+    console.log("name: %s, address: %s", name, address)
+}
+
+main("inj1h4rprmdmf9mx6rje7t3zwqsm9f4cf4gzv3ewnc")
+```
+
+```javascript
+// injective-1 mainnet example
+const InjectiveID = require('@siddomains/injective-sidjs').default
+const {getInjectiveIDAddress} = require('@siddomains/injective-sidjs')
+const {getNetworkEndpoints, Network} = require("@injectivelabs/networks");
+const {ChainId} = require("@injectivelabs/ts-types");
+
+async function main(address) {
+    const endpoints = getNetworkEndpoints(Network.Mainnet)
+    const injectiveId = new InjectiveID({
+        grpc: endpoints.grpc,
+        chainId: ChainId.Mainnet,
+        injectiveIdAddress: getInjectiveIDAddress(ChainId.Mainnet)
+    })
+
+    const name = await injectiveId.getName(address)
+    console.log("name: %s, address: %s", name, address)
+}
+
+main("inj10zvhv2a2mam8w7lhy96zgg2v8d800xcs7hf2tf")
+```
 
 ### exports
 
@@ -93,7 +140,7 @@ different resolver that is different from is currently recorded on the registry.
 async getName(address: InjectiveAddress) => Promise<Name>
 ```
 
-Returns the reverse record for a particular Sei address.
+Returns the reverse record for a particular Injective address.
 
 ### Name Interface
 
